@@ -41,6 +41,7 @@ char	*ft_strjoin(const char *s1, const char *s2)
 	while (s2[j])
 	{
 		new[i] = s2[j];
+		i++;
 		j++;
 	}
 	new[i] = '\0';
