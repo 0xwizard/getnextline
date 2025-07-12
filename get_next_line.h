@@ -13,10 +13,16 @@
 #ifndef GET_NEXT_LINE_H
 # define GET_NEXT_LINE_H
 # ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 1024
+#  define BUFFER_SIZE 20
 # endif
 
 #include <unistd.h>
 #include <stdlib.h>
+
+int      ft_strlen(const char *p);
+char	*ft_strjoin(char *s1, char *s2, size_t index);
+char    *ft_strchr(char c, char *p);
+char    *ft_substr(char *p, size_t start, size_t end);
+char	*get_next_line(int fd);
 
 #endif
