@@ -5,11 +5,16 @@
 
 int main(void)
 {
-    //char *buff = malloc(sizeof(char *) * 1);
-    int a = open("test.txt", O_RDONLY | O_CREAT | O_APPEND, 0644);
+    int a = open("test.txt", O_RDONLY);
+    char *buff;
+    buff = get_next_line(a);
     //read(a, buff, BUFFER_SIZE);
-    printf("%s", get_next_line(a));
-    printf("%s", get_next_line(a));
-    printf("%s", get_next_line(a)); //last print is buggy fix it 
+    while ((ft_strchr('\n', buff)))
+    {
+        printf("%s", buff);
+        buff = get_next_line(a);
+    }
+    // printf("%s", get_next_line(a));
+    // printf("%s", get_next_line(a)); //last print is buggy fix it 
 
 }
