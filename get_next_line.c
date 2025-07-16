@@ -23,7 +23,7 @@ char	*get_next_line(int fd)
 {
 	char	*ft_read;
 	char	*line;
-	static char	*left = NULL;
+	static char	*left = NULL; 
 	ssize_t	read_size;
 	size_t		i;
 	
@@ -43,9 +43,13 @@ char	*get_next_line(int fd)
 		line = ft_strjoin(line, ft_read, i);
 	}
 	if (!ft_strchr('\n', left) && BUFFER_SIZE > read_size)
+	{
 		left = NULL;
-	else 
+	}
+	 else 
 		left = ft_substr(ft_read, i, ft_strlen(ft_read) - 1);
+	if (!left)
+		return (NULL);
 	return (line);
 }
 
