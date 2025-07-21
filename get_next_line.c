@@ -14,11 +14,6 @@
 #include <fcntl.h>
 #include <stdio.h>
 
-// static void *gnl_left(char *left, ssize_t read_size, char *ft_read, size_t i)
-// {
-	
-// }
-#include <string.h>
 char	*get_next_line(int fd)
 {
 	char	*ft_read;
@@ -37,22 +32,15 @@ char	*get_next_line(int fd)
 	while (!ft_strchr('\n', line) && read_size > 0)
 	{
 		read_size = read(fd, ft_read, BUFFER_SIZE);
-		i = 0;
-		while (ft_read[i] && ft_read[i] != '\n' && i < read_size)
-			i++;
-		if (ft_read[i] == '\n')
-			i++;
-		line = ft_strjoin(line, ft_read, i);
-		//printf("line:%s\n", line);
+		line = ft_strjoin(line, ft_read, read_size);
 	}
-	//if (!ft_strchr('\n', left) && BUFFER_SIZE > read_size)
-		//left = NULL;
-	// else 
-	if (i < read_size)
-		left = ft_substr(ft_read, i, ft_strlen(ft_read) - 1);
-	else
-		left = NULL;
-	//printf("LEFT:%s#\n\n", left);
+	i = 0;
+	while (line[i] && line[i] != '\n')
+		i++;
+	if (line[i] == '\n')
+		i++;
+	left = ft_substr(line, i, ft_strlen(line) - 1);
+	line[i] = '\0';
 	if (*line == '\0')
 		return (NULL);
 	return (line);

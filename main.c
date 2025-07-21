@@ -9,13 +9,38 @@ int main(void)
     char *buff;
     //read(a, buff, BUFFER_SIZE);
     int i = -1;
-    while (++i < 5)
-    {
-        buff = get_next_line(a);
-        //printf("y\n");
-        printf("LINE:%s#\n", buff);
-        free(buff);
-    }
+    buff = get_next_line(a);
+    printf("LINE:%s#\n", buff);
+    free(buff);
+
+    buff = get_next_line(a);
+    printf("LINE:%s#\n", buff);
+    free(buff);
+
+    buff = get_next_line(a);
+    printf("LINE:%s#\n", buff);
+    free(buff);
+
+    buff = get_next_line(a);
+    printf("LINE:%s#\n", buff);
+    free(buff);
+
+    buff = get_next_line(a);
+    printf("LINE:%s#\n", buff);
+    free(buff);
+    buff = get_next_line(a);
+    printf("LINE:%s#\n", buff);
+    free(buff);
+    buff = get_next_line(a);
+    printf("LINE:%s#\n", buff);
+    free(buff);
+    // while (++i < 5)
+    // {
+    //     buff = get_next_line(a);
+    //     //printf("y\n");
+    //     printf("LINE:%s#\n", buff);
+    //     free(buff);
+    // }
     close (a);
     //printf("%s", buff);
    // free(buff);
