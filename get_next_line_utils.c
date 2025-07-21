@@ -28,8 +28,8 @@ int	ft_strlen(const char *p)
 char	*ft_strjoin(char *s1, char *s2, size_t index)
 {
 	char	*new;
-	int		i;
-	int		j;
+	size_t		i;
+	size_t		j;
 
 	new = malloc(ft_strlen(s1) + index + 1); // +2 \n - '\0' ?
 	if (!new)
@@ -41,15 +41,14 @@ char	*ft_strjoin(char *s1, char *s2, size_t index)
 		i++;
 	}
 	j = 0;
-	while (s2[j] && j < index)
+	while (s2 && s2[j] && j < index)
 	{
 		new[i] = s2[j];
 		i++;
 		j++;
 	}
 	new[i] = '\0'; // i+1 null 
-	if (s1)
-		free(s1);
+	//free(s1);
 	return (new);
 }
 char *ft_strchr(char c, char *p)
@@ -71,8 +70,10 @@ char *ft_strchr(char c, char *p)
 char *ft_substr(char *p, size_t start, size_t end)
 {
 	char *new;
-	int i; 
+	size_t i; 
 	
+	if (!*p || !p[start])
+		return (NULL);
 	new = malloc(sizeof(char) * (end - start + 1));
 	end = ft_strlen(p) - 1;
 	if (!new)

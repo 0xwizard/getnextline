@@ -18,21 +18,23 @@
 // {
 	
 // }
-
+#include <string.h>
 char	*get_next_line(int fd)
 {
 	char	*ft_read;
 	char	*line;
-	static char	*left = NULL; 
+	static char	*left = NULL;
 	ssize_t	read_size;
-	size_t		i;
+	ssize_t		i;
 	
-	ft_read = malloc(sizeof(char) * BUFFER_SIZE + 1);
+	if (fd < 0 && BUFFER_SIZE <= 0)
+		return (NULL);
+	ft_read = calloc(sizeof(char), BUFFER_SIZE + 1);
 	if (!ft_read)
 		return (NULL);
 	line = left;
 	read_size = 1;
-	while (ft_strchr('\n', line) == NULL && read_size > 0)
+	while (!ft_strchr('\n', line) && read_size > 0)
 	{
 		read_size = read(fd, ft_read, BUFFER_SIZE);
 		i = 0;
@@ -41,15 +43,17 @@ char	*get_next_line(int fd)
 		if (ft_read[i] == '\n')
 			i++;
 		line = ft_strjoin(line, ft_read, i);
+		//printf("line:%s\n", line);
 	}
-	if (!ft_strchr('\n', left) && BUFFER_SIZE > read_size)
-	{
-		left = NULL;
-	}
-	 else 
+	//if (!ft_strchr('\n', left) && BUFFER_SIZE > read_size)
+		//left = NULL;
+	// else 
+	if (i < read_size)
 		left = ft_substr(ft_read, i, ft_strlen(ft_read) - 1);
-	if (!left)
+	else
+		left = NULL;
+	//printf("LEFT:%s#\n\n", left);
+	if (*line == '\0')
 		return (NULL);
 	return (line);
 }
-
