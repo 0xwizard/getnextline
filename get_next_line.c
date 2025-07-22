@@ -13,18 +13,22 @@
 #include "get_next_line.h"
 #include <fcntl.h>
 #include <stdio.h>
+#include <stdlib.h>
+
+// calloc - free - gnl helpers
 
 char	*get_next_line(int fd)
 {
-	char	*ft_read;
-	char	*line;
+	char		*ft_read;
+	char		*line;
+	char		*temp;
 	static char	*left = NULL;
-	ssize_t	read_size;
+	ssize_t		read_size;
 	ssize_t		i;
-	
+
 	if (fd < 0 && BUFFER_SIZE <= 0)
 		return (NULL);
-	ft_read = calloc(sizeof(char), BUFFER_SIZE + 1);
+	ft_read = calloc(sizeof(char), (BUFFER_SIZE + 1));
 	if (!ft_read)
 		return (NULL);
 	line = left;
@@ -32,7 +36,9 @@ char	*get_next_line(int fd)
 	while (!ft_strchr('\n', line) && read_size > 0)
 	{
 		read_size = read(fd, ft_read, BUFFER_SIZE);
-		line = ft_strjoin(line, ft_read, read_size);
+		temp = line;
+		line = ft_strjoin(temp, ft_read, read_size);
+		free(temp);
 	}
 	i = 0;
 	while (line[i] && line[i] != '\n')

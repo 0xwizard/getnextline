@@ -11,12 +11,14 @@
 /* ************************************************************************** */
 
 #include "get_next_line.h"
+#include <stdio.h>
 
-// strjoin - substr -- strlen -- strchr 
+// ft calloc
 
 int	ft_strlen(const char *p)
 {
 	int	i;
+
 	if (!p)
 		return (0);
 	i = 0;
@@ -28,12 +30,14 @@ int	ft_strlen(const char *p)
 char	*ft_strjoin(char *s1, char *s2, size_t index)
 {
 	char	*new;
-	size_t		i;
-	size_t		j;
+	size_t	i;
+	size_t	j;
 
-	new = malloc(ft_strlen(s1) + index + 1); // +2 \n - '\0' ?
+	new = malloc(ft_strlen(s1) + index + 1);
 	if (!new)
 		return (NULL);
+	if(!s1)
+		return(s2);
 	i = 0;
 	while (s1 && s1[i])
 	{
@@ -47,18 +51,17 @@ char	*ft_strjoin(char *s1, char *s2, size_t index)
 		i++;
 		j++;
 	}
-	new[i] = '\0'; // i+1 null 
-	//free(s1);
+	new[i] = '\0';
 	return (new);
 }
-char *ft_strchr(char c, char *p)
+char	*ft_strchr(char c, char *p)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	if (!p)
 		return (NULL);
-	while(p[i])
+	while (p[i])
 	{
 		if (p[i] == c)
 			return (&p[i]);
@@ -67,14 +70,14 @@ char *ft_strchr(char c, char *p)
 	return (NULL);
 }
 
-char *ft_substr(char *p, size_t start, size_t end)
+char	*ft_substr(char *p, size_t start, size_t end)
 {
-	char *new;
-	size_t i; 
-	
+	char	*new;
+	size_t	i;
+
 	if (!*p || !p[start])
 		return (NULL);
-	new = malloc(sizeof(char) * (end - start + 1));
+	new = malloc(sizeof(char) * (end - start + 2));
 	end = ft_strlen(p) - 1;
 	if (!new)
 		return (NULL);
@@ -87,4 +90,20 @@ char *ft_substr(char *p, size_t start, size_t end)
 	}
 	new[i] = '\0';
 	return (new);
+}
+
+void	*ft_calloc(size_t nmemb, size_t size)
+{
+	void	*ptr;
+	char	*str;
+
+	ptr = malloc(nmemb * size);
+	if (!ptr)
+		return (NULL);
+	str = (char *)ptr;
+	while (size--)
+	{
+		*str++ = '\0';
+	}
+	return (ptr);
 }
