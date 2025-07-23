@@ -12,42 +12,58 @@
 
 #include "get_next_line.h"
 #include <fcntl.h>
-#include <stdio.h>
 #include <stdlib.h>
 
-// calloc - free - gnl helpers
+void	next_line(char **line, char **left)
+{
+	int i;
+
+	i = 0;
+	while ((*line)[i] && (*line)[i] != '\n')
+		i++;
+	if ((*line)[i] == '\n')
+	{
+		i++;
+		free(*left);
+		(*left) = ft_substr((*line), i, ft_strlen((*line)) - 1);
+		(*line)[i] = '\0';
+	}
+	else
+	{
+		free(*left);
+		(*left) = NULL;
+	}
+	if ((*line) && (*line)[0] == '\0')
+	{
+		free(*line);
+		(*line) = NULL;
+	}
+}
 
 char	*get_next_line(int fd)
 {
 	char		*ft_read;
 	char		*line;
 	char		*temp;
-	static char	*left = NULL;
+	static char	*left;
 	ssize_t		read_size;
-	ssize_t		i;
 
-	if (fd < 0 && BUFFER_SIZE <= 0)
+	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
-	ft_read = calloc(sizeof(char), (BUFFER_SIZE + 1));
+	ft_read = ft_calloc(sizeof(char), (BUFFER_SIZE + 1));
 	if (!ft_read)
 		return (NULL);
-	line = left;
+	line = ft_substr(left, 0, ft_strlen(left) - 1);
 	read_size = 1;
 	while (!ft_strchr('\n', line) && read_size > 0)
 	{
 		read_size = read(fd, ft_read, BUFFER_SIZE);
-		temp = line;
-		line = ft_strjoin(temp, ft_read, read_size);
-		free(temp);
+		temp = ft_strjoin(line, ft_read, read_size);
+		if (line != left)
+			free(line);
+		line = temp;
 	}
-	i = 0;
-	while (line[i] && line[i] != '\n')
-		i++;
-	if (line[i] == '\n')
-		i++;
-	left = ft_substr(line, i, ft_strlen(line) - 1);
-	line[i] = '\0';
-	if (*line == '\0')
-		return (NULL);
+	free(ft_read);
+	next_line(&line, &left);
 	return (line);
 }

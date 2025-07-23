@@ -13,8 +13,6 @@
 #include "get_next_line.h"
 #include <stdio.h>
 
-// ft calloc
-
 int	ft_strlen(const char *p)
 {
 	int	i;
@@ -33,11 +31,11 @@ char	*ft_strjoin(char *s1, char *s2, size_t index)
 	size_t	i;
 	size_t	j;
 
-	new = malloc(ft_strlen(s1) + index + 1);
+	// if (!s2)
+	// 	return (NULL);
+	new = ft_calloc(ft_strlen(s1) + index + 2, 1);
 	if (!new)
 		return (NULL);
-	if(!s1)
-		return(s2);
 	i = 0;
 	while (s1 && s1[i])
 	{
@@ -75,9 +73,9 @@ char	*ft_substr(char *p, size_t start, size_t end)
 	char	*new;
 	size_t	i;
 
-	if (!*p || !p[start])
+	if (!p || !p[start])
 		return (NULL);
-	new = malloc(sizeof(char) * (end - start + 2));
+	new = ft_calloc(sizeof(char) , (end - start + 2));
 	end = ft_strlen(p) - 1;
 	if (!new)
 		return (NULL);
@@ -91,6 +89,7 @@ char	*ft_substr(char *p, size_t start, size_t end)
 	new[i] = '\0';
 	return (new);
 }
+
 
 void	*ft_calloc(size_t nmemb, size_t size)
 {
