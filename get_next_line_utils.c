@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "get_next_line.h"
-#include <stdio.h>
 
 int	ft_strlen(const char *p)
 {
@@ -31,9 +30,7 @@ char	*ft_strjoin(char *s1, char *s2, size_t index)
 	size_t	i;
 	size_t	j;
 
-	// if (!s2)
-	// 	return (NULL);
-	new = ft_calloc(ft_strlen(s1) + index + 2, 1);
+	new = ft_calloc(ft_strlen(s1) + index + 1, 1);
 	if (!new)
 		return (NULL);
 	i = 0;
@@ -90,19 +87,21 @@ char	*ft_substr(char *p, size_t start, size_t end)
 	return (new);
 }
 
-
 void	*ft_calloc(size_t nmemb, size_t size)
 {
 	void	*ptr;
 	char	*str;
+	size_t	i;
 
 	ptr = malloc(nmemb * size);
 	if (!ptr)
 		return (NULL);
 	str = (char *)ptr;
-	while (size--)
+	i = 0;
+	while (i < nmemb * size)
 	{
-		*str++ = '\0';
+		str[i] = '\0';
+		i++;
 	}
 	return (ptr);
 }

@@ -26,6 +26,5 @@ char	*ft_strchr(char c, char *p);
 char	*ft_substr(char *p, size_t start, size_t end);
 char	*get_next_line(int fd);
 void	*ft_calloc(size_t nmemb, size_t size);
-void    next_line(char **line, char **left);
 
 #endif

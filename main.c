@@ -16,24 +16,24 @@ int main(void)
 	int i;
 	int b;
 	char *arr[1024];
-	char *test; 
-	
+	char *test;
+
 	b = open("test.txt", O_RDONLY);
 	i = 0;
-	recursiveprint(b);
-	// test = get_next_line(b);
-	// while (test != NULL)
-	// {
-	// 	arr[i] = test;
-	// 	i++;
-	// 	test = get_next_line(b);
-	// }
-	// i--;
-	// while (i >= 0)
-	// {
-	// 	printf("%s", arr[i]);
-	// 	i--;
-	// }
+	// recursiveprint(b);
+	test = get_next_line(b);
+	while (test != NULL)
+	{
+		arr[i] = test;
+		i++;
+		test = get_next_line(b);
+	}
+	i--;
+	while (i >= 0)
+	{
+		printf("%s", arr[i]);
+		i--;
+	}
 }
 // int main(void)
 // {

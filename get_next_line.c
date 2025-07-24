@@ -14,7 +14,7 @@
 #include <fcntl.h>
 #include <stdlib.h>
 
-void	next_line(char **line, char **left)
+static char		*next_line(char **line, char **left)
 {
 	int i;
 
@@ -38,6 +38,7 @@ void	next_line(char **line, char **left)
 		free(*line);
 		(*line) = NULL;
 	}
+	return ((*line));
 }
 
 char	*get_next_line(int fd)
@@ -58,12 +59,13 @@ char	*get_next_line(int fd)
 	while (!ft_strchr('\n', line) && read_size > 0)
 	{
 		read_size = read(fd, ft_read, BUFFER_SIZE);
+		if (read_size == -1)
+			return (free(ft_read), NULL);
 		temp = ft_strjoin(line, ft_read, read_size);
 		if (line != left)
 			free(line);
 		line = temp;
 	}
 	free(ft_read);
-	next_line(&line, &left);
-	return (line);
+	return (next_line(&line, &left));
 }
