@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
 static void		next_line(char **line, char **left)
 {
@@ -43,7 +43,7 @@ char	*get_next_line(int fd)
 	char		*ft_read;
 	char		*line;
 	char		*temp;
-	static char	*left;
+	static char	*left[1024];
 	ssize_t		read_size;
 
 	if (fd < 0 || BUFFER_SIZE <= 0)
@@ -51,17 +51,17 @@ char	*get_next_line(int fd)
 	ft_read = ft_calloc(sizeof(char), (BUFFER_SIZE + 1));
 	if (!ft_read)
 		return (NULL);
-	line = ft_substr(left, 0, ft_strlen(left) - 1);
+	line = ft_substr(left[fd], 0, ft_strlen(left[fd]) - 1);
 	read_size = 1;
 	while (!ft_strchr('\n', line) && read_size > 0)
 	{
 		read_size = read(fd, ft_read, BUFFER_SIZE);
 		temp = ft_strjoin(line, ft_read, read_size);
-		if (line != left)
+		if (line != left[fd])
 			free(line);
 		line = temp;
 	}
 	free(ft_read);
-	next_line(&line, &left);
+	next_line(&line, &left[fd]);
 	return (line);
 }
