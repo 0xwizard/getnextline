@@ -2,39 +2,53 @@
 #include <fcntl.h>
 #include <stdio.h>
 
-// void	recursiveprint(int fd)
+// RECURSIVE REVERSE
+// void recursive(int fd)
 // {
 // 	char *a = get_next_line(fd);
 // 	if (a)
 // 	{
-// 		recursiveprint(fd);
-// 		printf("%s", a);
+// 			recursive(fd);
+// 			printf("%s", a);
 // 	}
 // }
-// int main(void)
+
+// int	main(void)
 // {
-// 	int i;
-// 	int b;
-// 	char *arr[1024];
-// 	char *test;
+//  	int b;
 
 // 	b = open("test.txt", O_RDONLY);
-// 	i = 0;
-// 	// recursiveprint(b);
-// 	test = get_next_line(b);
+// 	recursive(b);
+// 	close (b);
+// }
+
+// ITERATIVE REVERSE
+
+// int		main(void)
+// {
+// 	int a = open("test.txt", O_RDONLY);
+// 	int i = 0;
+// 	char *test;
+
+// 	char *buff[1024];
+
+// 	test = get_next_line(a);
 // 	while (test != NULL)
 // 	{
-// 		arr[i] = test;
+// 		buff[i] = test;
 // 		i++;
-// 		test = get_next_line(b);
+// 		test = get_next_line(a);
 // 	}
 // 	i--;
 // 	while (i >= 0)
 // 	{
-// 		printf("%s", arr[i]);
+// 		printf("%s", buff[i]);
 // 		i--;
 // 	}
 // }
+
+// ARRAY REVERSE PRINT
+
 // int main(void)
 // {
 // 	char *arr[] = {"Merhaba", "Ben", "Hakan"};
@@ -46,61 +60,56 @@
 // 		printf("%s", arr[i]);
 // 		i--;
 // 	}
+
+// REGULAR ITERATIVE
+
+// int	main(void)
+// {
+// 	int		a;
+// 	char	*buff;
+
+// 	a = open("test.txt", O_RDONLY);
+// 	buff = get_next_line(a);
+// 	while (buff)
+// 	{
+// 		printf("%s", buff);
+// 		free(buff);
+// 		buff = get_next_line(a);
+// 	}
+// 	free(buff);
 // }
-int	main(void)
-{
-	int		a;
-	int		b;
-	char	*buff;
-	// int		i;
 
-	a = open("test.txt", O_RDONLY);
-	b = open("test2.txt", O_RDONLY);
-	//read(a, buff, BUFFER_SIZE);
-	// while (++i < 5)
-	// {
-	buff = get_next_line(a);
-	printf("%s", buff);
-	free(buff);
-	// }
-	while (buff)
-	{
-		buff = get_next_line(a);
-		printf("%s", buff);
-		free(buff);
-	}
-
-	// printf("%s", buff);
-	// free(buff);
-	// buff = get_next_line(a);
-	// printf("%s", buff);
-	// free(buff);
-	// buff = get_next_line(a);
-	// printf("%s", buff);
-	// free(buff);
-	// buff = get_next_line(a);
-	// printf("%s", buff);
-	// free(buff);
-	close(a);
-	//printf("%s", get_next_line(a)); //last print is buggy fix it
+// REGULAR BONUS
+// int	main(void)
+// {
+// 	int a = open("test.txt", O_RDONLY);
+// 	int b = open("test2.txt", O_RDONLY);
+// 	char *buff = get_next_line(a);
+// 	char *buff2 = get_next_line(b);
+// 	while (buff || buff2)
+// 	{
+// 		printf("%s", buff);
+// 		free(buff);
+// 		buff = get_next_line(a);
+// 		printf("%s", buff2);
+// 		free(buff2);
+// 		buff2 = get_next_line(b);
+// 	}
+// }
 
 
-	// buff = get_next_line(a);
-	// printf("%s", buff);
-	// free(buff);
-	// buff = get_next_line(a);
-	// printf("%s", buff);
-	// free(buff);
-	// buff = get_next_line(a);
-	// printf("%s", buff);
-	// free(buff);
-	// buff = get_next_line(a);
-	// printf("%s", buff);
-	// free(buff);
-	//buff = get_next_line(a);
-	//printf("%s", buff);
-	//free(buff);
-	// buff = get_next_line(a);
-	// printf("%s", buff);
-	// free(buff);
-}
+// READ FROM TERMINAL
+
+// int		main(void)
+// {
+// 	char *buff = get_next_line(0);
+
+// 	while (buff)
+// 	{
+// 		printf("%s", buff);
+// 		free(buff);
+// 		buff = get_next_line(0);
+// 	}
+// }
+
+
